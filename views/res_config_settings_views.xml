@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_cima" model="ir.ui.view">
+            <field name="name">res.config.settings.view.cima</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app string="CIMA (AEMPS)" name="cs_cima">
+                        <block title="CIMA — Agencia Española de Medicamentos (AEMPS)">
+                            <setting string="Activar búsqueda CIMA"
+                                     help="Busca medicamentos en la base de datos pública de la AEMPS. Gratuito, sin API key.">
+                                <field name="cima_api_enabled"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

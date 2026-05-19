@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cs_drug_usage_log_view_list" model="ir.ui.view">
+            <field name="name">cs.drug.usage.log.list</field>
+            <field name="model">cs.drug.usage.log</field>
+            <field name="arch" type="xml">
+                <list string="Registro de Uso de Medicamentos" create="false" delete="false">
+                    <field name="date" string="Fecha"/>
+                    <field name="drug_id" string="Medicamento"/>
+                    <field name="usage_type" string="Tipo"/>
+                    <field name="resident_id" string="Residente"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="cs_drug_usage_log_view_search" model="ir.ui.view">
+            <field name="name">cs.drug.usage.log.search</field>
+            <field name="model">cs.drug.usage.log</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Registros de Uso">
+                    <field name="drug_id" string="Medicamento"/>
+                    <field name="resident_id" string="Residente"/>
+                    <field name="date" string="Fecha"/>
+                    <separator/>
+                    <filter name="filter_prescriptions" string="Prescripciones" domain="[('usage_type', '=', 'prescription')]"/>
+                    <filter name="filter_prn" string="Rescates PRN" domain="[('usage_type', '=', 'prn_rescue')]"/>
+                    <separator/>
+                    <filter name="group_drug" string="Agrupar por Medicamento" context="{'group_by': 'drug_id'}"/>
+                    <filter name="group_type" string="Agrupar por Tipo" context="{'group_by': 'usage_type'}"/>
+                    <filter name="group_date" string="Agrupar por Fecha" context="{'group_by': 'date'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="cs_drug_usage_log_action" model="ir.actions.act_window">
+            <field name="name">Registro de Uso de Medicamentos</field>
+            <field name="res_model">cs.drug.usage.log</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_drug_catalog_user,Drug Catalog User,model_cs_drug_catalog,base.group_user,1,0,1,0
+access_drug_catalog_system,Drug Catalog System,model_cs_drug_catalog,base.group_system,1,1,1,1
+access_drug_usage_log_user,Drug Usage Log User,model_cs_drug_usage_log,base.group_user,1,0,1,0
+access_drug_usage_log_system,Drug Usage Log System,model_cs_drug_usage_log,base.group_system,1,1,1,1
+access_cima_import_wizard_user,CIMA Import Wizard User,model_cs_cima_import_wizard,base.group_user,1,1,1,1
+access_cima_import_line_user,CIMA Import Line User,model_cs_cima_import_line,base.group_user,1,1,1,1

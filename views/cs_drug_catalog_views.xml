@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cs_drug_catalog_view_list" model="ir.ui.view">
+            <field name="name">cs.drug.catalog.list</field>
+            <field name="model">cs.drug.catalog</field>
+            <field name="arch" type="xml">
+                <list string="Catálogo de Medicamentos">
+                    <field name="name" string="Medicamento"/>
+                    <field name="active_principles" string="Principios Activos"/>
+                    <field name="galenical_form" string="Forma"/>
+                    <field name="route" string="Vía"/>
+                    <field name="atc_code" string="ATC"/>
+                    <field name="laboratory" string="Laboratorio"/>
+                    <field name="market_status" string="Estado"
+                           decoration-success="market_status == 'available'"
+                           decoration-danger="market_status == 'deleted'"/>
+                    <field name="requires_prescription" string="Receta" optional="show"/>
+                    <field name="supply_problem" string="Suministro" optional="show"
+                           decoration-warning="supply_problem == True"/>
+                    <field name="black_triangle" string="▲" optional="show"/>
+                    <field name="is_center_favorite" string="Favorito" widget="boolean_toggle"/>
+                    <field name="cima_nregistro" string="Nº Registro" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="cs_drug_catalog_view_form" model="ir.ui.view">
+            <field name="name">cs.drug.catalog.form</field>
+            <field name="model">cs.drug.catalog</field>
+            <field name="arch" type="xml">
+                <form string="Medicamento">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_usage_log" type="object"
+                                    class="oe_stat_button" icon="fa-bar-chart"
+                                    invisible="usage_count == 0">
+                                <field name="usage_count" widget="statinfo" string="Usos"/>
+                            </button>
+                        </div>
+                        <div class="alert alert-warning" role="alert"
+                             invisible="supply_problem == False">
+                            Este medicamento tiene problemas de suministro activos según CIMA.
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" placeholder="Nombre del medicamento..."/></h1>
+                        </div>
+                        <group>
+                            <group string="Identificación">
+                                <field name="active_principles"/>
+                                <field name="galenical_form"/>
+                                <field name="route"/>
+                                <field name="laboratory"/>
+                                <field name="market_status"/>
+                                <field name="is_center_favorite"/>
+                            </group>
+                            <group string="Clasificación ATC">
+                                <field name="atc_code"/>
+                                <field name="atc_description"/>
+                            </group>
+                        </group>
+                        <group string="Alertas Clínicas">
+                            <group>
+                                <field name="prescription_conditions"/>
+                                <field name="requires_prescription"/>
+                                <field name="affects_driving"/>
+                            </group>
+                            <group>
+                                <field name="black_triangle"/>
+                                <field name="supply_problem"/>
+                            </group>
+                        </group>
+                        <group string="CIMA (AEMPS)">
+                            <group>
+                                <field name="cima_nregistro"/>
+                                <field name="last_sync_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="cima_url" widget="url" string="Ficha CIMA ↗"/>
+                            </group>
+                        </group>
+                        <group string="Observaciones" col="1">
+                            <field name="notes" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="cs_drug_catalog_view_search" model="ir.ui.view">
+            <field name="name">cs.drug.catalog.search</field>
+            <field name="model">cs.drug.catalog</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Medicamentos">
+                    <field name="name" string="Nombre"/>
+                    <field name="active_principles" string="Principio Activo"/>
+                    <field name="atc_code" string="Código ATC"/>
+                    <field name="cima_nregistro" string="Nº Registro"/>
+                    <separator/>
+                    <filter name="filter_favorites" string="Favoritos"
+                            domain="[('is_center_favorite', '=', True)]"/>
+                    <filter name="filter_available" string="Comercializados"
+                            domain="[('market_status', '=', 'available')]"/>
+                    <filter name="filter_supply_problem" string="Problema suministro"
+                            domain="[('supply_problem', '=', True)]"/>
+                    <filter name="filter_prescription" string="Con receta"
+                            domain="[('requires_prescription', '=', True)]"/>
+                    <separator/>
+                    <filter name="group_route" string="Agrupar por Vía"
+                            context="{'group_by': 'route'}"/>
+                    <filter name="group_atc" string="Agrupar por ATC"
+                            context="{'group_by': 'atc_code'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="cs_drug_catalog_action" model="ir.actions.act_window">
+            <field name="name">Catálogo de Medicamentos</field>
+            <field name="res_model">cs.drug.catalog</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    El catálogo está vacío.
+                </p>
+                <p>
+                    Usa <b>CIMA → Importar desde CIMA</b> para añadir medicamentos
+                    desde la base de datos pública de la AEMPS.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

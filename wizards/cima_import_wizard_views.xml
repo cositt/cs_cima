@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cs_cima_import_wizard_view_form" model="ir.ui.view">
+            <field name="name">cs.cima.import.wizard.form</field>
+            <field name="model">cs.cima.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Importar Medicamentos desde CIMA (AEMPS)">
+                    <div class="alert alert-info" role="alert">
+                        Busca medicamentos en la base de datos pública de la AEMPS.
+                        Solo aparecen medicamentos comercializados en España.
+                        Gratuito, sin API key.
+                    </div>
+                    <group>
+                        <field name="query" string="Nombre del medicamento"/>
+                    </group>
+                    <div class="o_row mb-2">
+                        <button name="action_search" type="object"
+                                string="Buscar en CIMA" class="btn btn-primary"/>
+                        <span class="ms-2 text-muted" invisible="result_count == 0">
+                            <field name="result_count" readonly="1"/> resultados
+                        </span>
+                    </div>
+                    <field name="line_ids" invisible="result_count == 0">
+                        <list editable="top" create="false" delete="false">
+                            <field name="selected" string="Importar"/>
+                            <field name="nombre" string="Nombre"/>
+                            <field name="labtitular" string="Laboratorio"/>
+                            <field name="market_status" string="Estado"
+                                   decoration-success="market_status == 'available'"
+                                   decoration-danger="market_status == 'deleted'"/>
+                            <field name="already_exists" string="Ya en catálogo"
+                                   decoration-warning="already_exists == True"/>
+                            <field name="nregistro" string="Nº Reg." optional="show"/>
+                        </list>
+                    </field>
+                    <footer>
+                        <button name="action_import_selected" type="object"
+                                string="Importar seleccionados"
+                                class="btn btn-success"
+                                invisible="result_count == 0"/>
+                        <button special="cancel" string="Cerrar" class="btn btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="cs_cima_import_wizard_action" model="ir.actions.act_window">
+            <field name="name">Importar desde CIMA</field>
+            <field name="res_model">cs.cima.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

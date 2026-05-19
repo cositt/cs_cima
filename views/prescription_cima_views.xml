@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="prescription_view_form_cima_inherit" model="ir.ui.view">
+            <field name="name">cs.prescription.form.cima.inherit</field>
+            <field name="model">cs.prescription</field>
+            <field name="inherit_id" ref="cs_medical_care.prescription_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='prescription_line_ids']//list//field[@name='medication_name']" position="before">
+                    <field name="drug_id" string="Medicamento (Catálogo)" optional="show" widget="drug_search"/>
+                </xpath>
+                <xpath expr="//field[@name='prescription_line_ids']//list//field[@name='duration_days']" position="after">
+                    <field name="cima_url" widget="url" string="CIMA ↗" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

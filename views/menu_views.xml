@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="cs_menu_cima_root"
+                  name="CIMA"
+                  sequence="60"
+                  groups="base.group_user"/>
+
+        <menuitem id="cs_menu_cima"
+                  name="CIMA"
+                  parent="cs_menu_cima_root"
+                  sequence="1"/>
+
+        <menuitem id="cs_menu_drug_catalog"
+                  name="Catálogo de Medicamentos"
+                  parent="cs_menu_cima"
+                  action="cs_drug_catalog_action"
+                  sequence="5"/>
+
+        <menuitem id="cs_menu_import_cima"
+                  name="Importar desde CIMA"
+                  parent="cs_menu_cima"
+                  action="cs_cima_import_wizard_action"
+                  sequence="10"/>
+
+        <menuitem id="cs_menu_drug_usage_log"
+                  name="Registro de Uso"
+                  parent="cs_menu_cima"
+                  action="cs_drug_usage_log_action"
+                  sequence="20"
+                  groups="base.group_system"/>
+    </data>
+</odoo>
