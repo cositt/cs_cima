@@ -4,6 +4,7 @@
         <menuitem id="cs_menu_cima_root"
                   name="CIMA"
                   sequence="60"
+                  web_icon="cs_cima,static/description/icon.png"
                   groups="base.group_user"/>
 
         <menuitem id="cs_menu_cima"
