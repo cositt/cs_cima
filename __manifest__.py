@@ -15,6 +15,7 @@
         'views/res_config_settings_views.xml',
         'views/menu_views.xml',
         'views/prescription_cima_views.xml',
+        'views/medical_care_cima_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

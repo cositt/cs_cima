@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- PRN list: drug_id antes de medication_name -->
+        <record id="view_prn_rescue_cima_list_inherit" model="ir.ui.view">
+            <field name="name">cs.medical.prn.rescue.cima.list.inherit</field>
+            <field name="model">cs.medical.prn.rescue</field>
+            <field name="inherit_id" ref="cs_medical_care.cs_medical_prn_rescue_view_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='medication_name']" position="before">
+                    <field name="drug_id" string="Catálogo CIMA" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRN form: drug_id antes de medication_name -->
+        <record id="view_prn_rescue_cima_form_inherit" model="ir.ui.view">
+            <field name="name">cs.medical.prn.rescue.cima.form.inherit</field>
+            <field name="model">cs.medical.prn.rescue</field>
+            <field name="inherit_id" ref="cs_medical_care.cs_medical_prn_rescue_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='medication_name']" position="before">
+                    <field name="drug_id" string="Buscar en Catálogo CIMA"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Analgesia form: drug_id antes de medication_description -->
+        <record id="view_analgesia_cima_form_inherit" model="ir.ui.view">
+            <field name="name">cs.medical.analgesia.cima.form.inherit</field>
+            <field name="model">cs.medical.analgesia</field>
+            <field name="inherit_id" ref="cs_medical_care.medical_analgesia_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='medication_description']" position="before">
+                    <field name="drug_id" string="Buscar en Catálogo CIMA"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Analgesia list: drug_id antes de medication_description -->
+        <record id="view_analgesia_cima_list_inherit" model="ir.ui.view">
+            <field name="name">cs.medical.analgesia.cima.list.inherit</field>
+            <field name="model">cs.medical.analgesia</field>
+            <field name="inherit_id" ref="cs_medical_care.medical_analgesia_view_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='medication_description']" position="before">
+                    <field name="drug_id" string="Catálogo CIMA" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Líneas de tratamiento: drug_id antes de description -->
+        <record id="view_treatment_line_cima_list_inherit" model="ir.ui.view">
+            <field name="name">cs.medical.treatment.line.cima.list.inherit</field>
+            <field name="model">cs.medical.treatment.line</field>
+            <field name="inherit_id" ref="cs_medical_care.view_treatment_line_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="before">
+                    <field name="drug_id" string="Catálogo CIMA" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
