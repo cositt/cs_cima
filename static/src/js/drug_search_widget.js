@@ -1,13 +1,12 @@
 /** @odoo-module **/
 
-import { many2OneField } from "@web/views/fields/many2one/many2one_field";
 import { registry } from "@web/core/registry";
 
 /**
- * Alias "drug_search" → Many2OneField estándar sobre cs.drug.catalog.
+ * Alias "drug_search" → campo many2one estandar sobre cs.drug.catalog.
  *
- * La búsqueda CIMA avanzada se realiza desde el menú CIMA → Catálogo.
- * Esto evita la necesidad de un template OWL personalizado y funciona
- * con el autocomplete estándar de Odoo.
+ * La busqueda CIMA avanzada se realiza desde el menu CIMA → Catalogo.
+ * Reutiliza el descriptor "many2one" ya registrado (robusto ante refactors del core Odoo).
  */
-registry.category("fields").add("drug_search", many2OneField);
+const fields = registry.category("fields");
+fields.add("drug_search", fields.get("many2one"));
